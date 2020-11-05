@@ -1,1 +1,5 @@
+django
+djangorestframework
 statistics
+django-heroku
+gunicorn
