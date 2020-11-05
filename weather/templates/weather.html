@@ -1,0 +1,117 @@
+<html>
+  <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://getbootstrap.com/docs/4.5/examples/starter-template/starter-template.css">
+{% if data %}
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Measurement', 'Degrees Celsius'],
+            ['Min', {{ data.temperature.min }}],
+            ['Median', {{ data.temperature.median }}],
+            ['Ave', {{ data.temperature.average }}],
+            ['Max', {{ data.temperature.max }}]
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Temperatures in Celsius',
+                subtitle: 'Date Range {{fromDate}} : {{toDate }}',
+            } 
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('temperature_chart_values'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        var hdata = google.visualization.arrayToDataTable([
+            ['Measurement', 'Percentage'],
+            ['Min', {{ data.humidity.min }}],
+            ['Median', {{ data.humidity.median }}],
+            ['Ave', {{ data.humidity.average }}],
+            ['Max', {{ data.humidity.max }}]
+        ]);
+
+        var hoptions = {
+            chart: {
+                title: 'Humidity Percentage',
+                subtitle: 'Date Range {{fromDate}} : {{toDate }}',
+            } 
+        };
+
+        var hchart = new google.charts.Bar(document.getElementById('humidity_chart_values'));
+
+        hchart.draw(hdata, google.charts.Bar.convertOptions(hoptions));
+      }
+      </script>
+{% endif %}
+  </head>
+
+  <body>
+        <main role="main" class="container">
+                {% if error %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{error}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                {% endif %}
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Wesley's Weather Service</h1>
+                    <p class="lead">Lets check some weather stats...</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 offset-lg-2">
+                        <form method="POST">
+                                {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-lg-2">
+                                    <input type="text" name="location" class="form-control" placeholder="City">
+                                </div>
+                                <div class="col">Select a Date From</div>
+                                <div class="col">
+                                    <input type="date" id="fromDate" name="fromDate"
+                                        class="form-control" placeholder="Start Date"
+                                        value="2020-07-22"
+                                        min="2016-01-01" max="2020-11-31">
+                                </div>
+                                <div class="col">Select a Date To</div>
+                                <div class="col">
+                                    <input type="date" id="toDate" name="toDate"
+                                        class="form-control" placeholder="Last name"
+                                        value="2020-08-22"
+                                        min="2016-01-01" max="2020-11-31">
+                                </div>
+                                <div class="col">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col">
+                            <div id="temperature_chart_values" style="width: 400px; height: 300px;"></div>
+
+                    </div>
+                    <div class="col">
+                            <div id="humidity_chart_values" style="width: 400px; height: 300px;"></div>
+
+                    </div>
+                </div>
+              <!--Div that will hold the pie chart-->
+            
+        </main>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  </body>
+
+</html>
