@@ -47,6 +47,10 @@ http://127.0.0.1:8000/api?location=Pretoria&fromDate=2020-07-01&toDate=2020-07-3
     }
 }
 ```
+## API Example
+```python
+python manage.py test
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
