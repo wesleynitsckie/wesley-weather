@@ -1,31 +1,52 @@
-# wesley-weather
+# Wesley' Weather Service
 
-## Local requirements
-- Python 3.6 
-- Install packages via pip:
-```
+A Django based application which finds historic weather data for a given city
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
 pip install -r requirements.txt
 ```
 
-Rename .env.sample to .env
-Get an API key at https://www.worldweatheronline.com/
+## Usage
 
-## Start the server
+```python
+python manage.py runserver
 ```
- python manage.py runserver
+Once the server is running open your browser and go to:
+[http://127.0.0.1:8000](http://127.0.0.1:8000/)
+
+## API Example
+
+**Base Url**: ```http://127.0.0.1:8000/api```
+ > Parameters:
+ - **location**: *String*  [A name of a city] *Required*
+ - **fromDate**: *Date* [format: YYYY-MM-DD] *Required*
+ - **toDate**: *Date* [format: YYYY-MM-DD] *Required*
+
+> Example
+```python
+http://127.0.0.1:8000/api?location=Pretoria&fromDate=2020-07-01&toDate=2020-07-30
+```
+> Sample Response
+```json
+{
+    "temperature": {
+        "average": 20.533333333333335,
+        "median": 20.5,
+        "max": 26,
+        "min": 13
+    },
+    "humidity": {
+        "average": 32.983333333333334,
+        "median": 29.0,
+        "min": 6,
+        "max": 86
+    }
+}
 ```
 
-In your browser go to play around
-```
-http://127.0.0.1:8000/weather/
-```
-
-## API 
-Base Url: http://127.0.0.1:8000/weather/api
-parameters:
-location:String  [A name of a city]
-fromDate: Date [format: YYYY-MM-DD]
-toDate: Date [format: YYYY-MM-DD]
-
-Example:
-http://127.0.0.1:8000/weather/api?location=Pretoria&fromDate=2020-01-01&toDate=2020-01-30
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
