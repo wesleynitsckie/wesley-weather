@@ -28,7 +28,7 @@ API_KEY = os.environ["WEATHER_API_KEY"]
 SECRET_KEY = 'e4u4bs^06am@ps12+14-=(80&b37aa#al9soqu&jk0468_id%#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['wesley-weather.herokuapp.com', '127.0.0.1']
 
