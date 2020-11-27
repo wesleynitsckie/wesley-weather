@@ -18,6 +18,9 @@ python manage.py runserver
 Once the server is running open your browser and go to:
 [http://127.0.0.1:8000](http://127.0.0.1:8000/)
 
+## Demo
+[https://wesley-weather.herokuapp.com/] https://wesley-weather.herokuapp.com/
+
 ## API Example
 
 **Base Url**: ```http://127.0.0.1:8000/api```
